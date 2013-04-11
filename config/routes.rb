@@ -1,4 +1,19 @@
 ClassMallBdc::Application.routes.draw do
+  resources :distributions
+
+
+  resources :ratings
+
+
+  resources :comments
+
+
+  resources :professors
+
+
+  resources :courses
+
+
   authenticated :user do
     root :to => 'home#index'
   end

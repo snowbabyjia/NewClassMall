@@ -1,0 +1,8 @@
+rails generate scaffold Professor name:string
+rails generate scaffold Comment content:text course:references user:references
+rails generate scaffold Rating score:integer course:references user:references
+rails generate scaffold distribution name:string description:text
+rails generate migration courses_users course_id:integer user_id:integer
+rails generate migration courses_majors course_id:integer major_id:integer
+rails generate migration courses_distributions course_id:integer distribution_id:integer
+rails generate migration courses_professors course_id:integer professor_id:integer
