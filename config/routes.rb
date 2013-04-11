@@ -1,4 +1,7 @@
 ClassMallBdc::Application.routes.draw do
+  resources :majors
+
+
   resources :distributions
 
 

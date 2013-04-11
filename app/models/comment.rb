@@ -1,5 +1,5 @@
 class Comment < ActiveRecord::Base
-  belongs_to :course
-  belongs_to :user
+  belongs_to :course, inverse_of: :comments
+  belongs_to :user, inverse_of: :comments
   attr_accessible :content
 end
