@@ -1,8 +1,8 @@
 <div class="notice">
   <i>Professor: </i><br />
-  <%= simple_format h(professor.name) %>
-  <%= link_to 'Destroy Professor', {:action => "delete_course", :course_id => @course.id, :professor_id => professor},
-    :confirm => "Are you sure?", 
-    :method => :delete
-    %>
+    <%= professor.name %>
+    <%= link_to 'Destroy Professor', {:action => "delete_course", :course_id => @course.id, :professor_id => professor},
+      :confirm => "Are you sure?", 
+      :method => :delete
+      %>
 </div>

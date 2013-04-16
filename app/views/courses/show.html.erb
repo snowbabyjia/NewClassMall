@@ -21,7 +21,8 @@
 </p>
 
 <%= render :partial => 'comment', :collection => @course.comments %>
-<%= render :partial => 'professor', :collection => @course.professors%>
+
+<%= render :partial => 'professor', :collection => @course.professors, :as => :professor%>
 
 
 <%= link_to 'Edit', edit_course_path(@course) %> |

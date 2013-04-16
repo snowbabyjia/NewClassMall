@@ -43,7 +43,6 @@ class ProfessorsController < ApplicationController
     @course = Course.find(params[:course_id])
     @professor = Professor.find_or_create_by_name(params[:professor])
     @professor.courses << @course
-    @course.professors << @professor
     if @professor.save
       redirect_to course_path(@course)
     else
