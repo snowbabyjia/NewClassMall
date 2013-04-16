@@ -80,4 +80,12 @@ class CoursesController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+    
+  def delete_course
+    @professor = Professor.find(params[:professor_id])
+    @course = Course.find(params[:id])
+    @professor.courses.delete @course
+    redirect_to course_path(@course)
+  end
 end

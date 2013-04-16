@@ -21,6 +21,7 @@
 </p>
 
 <%= render :partial => 'comment', :collection => @course.comments %>
+<%= render :partial => 'professor', :collection => @course.professors%>
 
 
 <%= link_to 'Edit', edit_course_path(@course) %> |
@@ -28,5 +29,11 @@
 
 <%= form_for([@course, @course.comments.build]) do |f| %>
   <%= f.text_field :content%>
+  <%= f.submit %>
+  
+<% end %>
+
+<%= form_for([@course, @course.professors.build]) do |f| %>
+  <%= f.text_field :name%>
   <%= f.submit %>
 <% end %>

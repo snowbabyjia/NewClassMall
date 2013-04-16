@@ -6,5 +6,5 @@ class Course < ActiveRecord::Base
   has_and_belongs_to_many :professors
   has_many :ratings, inverse_of: :course
   
-  attr_accessible :description, :ending, :starting, :title
+  attr_accessible :description, :ending, :starting, :title, :professors
 end

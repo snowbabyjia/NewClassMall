@@ -1,4 +1,5 @@
 class CommentsController < ApplicationController
+  before_filter :authenticate_user!
   # GET /comments
   # GET /comments.json
   def create
@@ -18,7 +19,9 @@ class CommentsController < ApplicationController
   # DELETE /comments/1.json
   def destroy
     @comment = Comment.find(params[:id])
+    # if @comment.user == current_user 
     @comment.destroy
+    #end
     redirect_to(@comment.course)
   end
 end

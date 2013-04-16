@@ -40,17 +40,17 @@ class ProfessorsController < ApplicationController
   # POST /professors
   # POST /professors.json
   def create
-    @professor = Professor.new(params[:professor])
-
-    respond_to do |format|
-      if @professor.save
-        format.html { redirect_to @professor, notice: 'Professor was successfully created.' }
-        format.json { render json: @professor, status: :created, location: @professor }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @professor.errors, status: :unprocessable_entity }
-      end
+    @course = Course.find(params[:course_id])
+    @professor = Professor.find_or_create_by_name(params[:professor])
+    @professor.courses << @course
+    @course.professors << @professor
+    if @professor.save
+      redirect_to course_path(@course)
+    else
+      format.html { render action: "new" }
+      format.json { render json: @professor.errors, status: :unprocessable_entity }
     end
+    
   end
 
   # PUT /professors/1
@@ -74,10 +74,10 @@ class ProfessorsController < ApplicationController
   def destroy
     @professor = Professor.find(params[:id])
     @professor.destroy
-
     respond_to do |format|
       format.html { redirect_to professors_url }
       format.json { head :no_content }
     end
   end
+
 end

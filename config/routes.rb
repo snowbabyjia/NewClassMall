@@ -11,11 +11,17 @@ ClassMallBdc::Application.routes.draw do
   resources :comments
 
 
-  resources :professors
+  resources :professors do
+  end
 
 
   resources :courses do
     resources :comments
+    resources :professors
+    member do
+      delete "delete_course"
+    end
+    
   end
 
   authenticated :user do

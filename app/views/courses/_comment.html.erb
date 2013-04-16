@@ -3,5 +3,5 @@
   <%= simple_format h(comment.content) %>
   <%= link_to 'Destroy Comment', comment,
     :confirm => 'Are you sure?',
-    :method => :delete %>
+    :method => :delete if comment.user == current_user%>
 </div>
