@@ -1,6 +1,6 @@
-
-    <%= professor.name %>
+	
+    <%= link_to professor.name, professor%>
     <%= link_to 'Destroy Professor', {:action => "delete_course", :course_id => @course.id, :professor_id => professor},
       :confirm => "Are you sure?", 
-      :method => :delete if current_user.has_role? :admin
+      :method => :delete if (current_user.present?) && (current_user.has_role? :admin)
       %>

@@ -50,6 +50,15 @@ class MajorsController < ApplicationController
       else
         redirect_to user_path(current_user), notice: 'You already have this major!'
       end
+    elsif !params[:course_id].blank?
+      @major = Major.find(params[:major][:id])
+      @course = Course.find(params[:course_id])
+      unless @major.courses.include?(@course)
+        @course.majors << @major
+        redirect_to course_path(@course), notice: 'Added major to this course!'
+      else
+        redirect_to course_path(@course), notice: 'Course already has this major!'
+      end
     end
   end
 
