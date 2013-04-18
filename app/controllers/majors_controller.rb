@@ -40,12 +40,16 @@ class MajorsController < ApplicationController
   # POST /majors
   # POST /majors.json
   def create
-    if params[:caller] == "users"
-      @major = Major.find_or_create_by_name(params[:major])
-      unless current_user.has_role? :admin
-        current_user.majors << @major
+    if !params[:user_id].blank?
+      @major = Major.find(params[:major][:id])
+      unless current_user.majors.include?(@major)
+        unless current_user.has_role? :admin
+          current_user.majors << @major
+        end
+        redirect_to user_path(current_user), notice: 'Added major to your profile!'
+      else
+        redirect_to user_path(current_user), notice: 'You already have this major!'
       end
-      redirect_to user_path(current_user), notice: 'Added major to your profile!'
     end
   end
 
