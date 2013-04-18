@@ -30,4 +30,20 @@ class UsersController < ApplicationController
       redirect_to users_path, :notice => "Can't delete yourself."
     end
   end
+  
+  def add_course
+    @course = Course.find(params[:course_id])
+    unless current_user.courses.include?(@course)
+      current_user.courses << @course
+      redirect_to course_path(@course), :notice => "Added course!"
+    else
+      redirect_to course_path(@course), :notice => "Did not add course. You already have it."
+    end
+  end
+  
+  def delete_course
+    @course = Course.find(params[:course_id])
+    current_user.courses.delete @course
+    redirect_to user_path(current_user), :notice => "Deleted course!"
+  end
 end

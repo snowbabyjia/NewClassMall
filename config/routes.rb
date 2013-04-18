@@ -18,6 +18,7 @@ ClassMallBdc::Application.routes.draw do
   resources :courses do
     resources :comments
     resources :professors
+    resources :users
     member do
       delete "delete_course"
     end
@@ -32,6 +33,12 @@ ClassMallBdc::Application.routes.draw do
   devise_for :users
   resources :users do
     resources :comments
+    resources :courses
+    member do
+      get "add_course"
+      post "add_course"
+      delete "delete_course"
+    end
   end
 
   # The priority is based upon order of creation:

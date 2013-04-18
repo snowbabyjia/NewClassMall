@@ -1,4 +1,5 @@
 <h3>Home</h3>
-<% @courses.each do |course| %>
+<%= button_to "My Courses", @user, :method => "get"%>
+<% @courses.shuffle.each do |course| %>
   <p>Course: <%= link_to course.title, course %>  Description: <%= course.description %> </p> 
 <% end %>

@@ -27,6 +27,7 @@
 
 <%= link_to 'Edit', edit_course_path(@course) %> |
 <%= link_to 'Back', courses_path %>
+<%= button_to 'Add to my course', :controller => "users", :action => "add_course", :course_id => @course, :method => "get"%>
 
 <%= form_for([@course, @course.comments.build]) do |f| %>
   <%= f.text_field :content%>
