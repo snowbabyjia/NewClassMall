@@ -21,6 +21,7 @@ ClassMallBdc::Application.routes.draw do
     resources :users
     resources :majors
     resources :distributions
+    resources :ratings
     member do
       delete "delete_course"
       delete "delete_major"
@@ -39,9 +40,9 @@ ClassMallBdc::Application.routes.draw do
     resources :comments
     resources :courses
     resources :majors
+    resources :ratings
     member do
       get "add_course"
-      post "add_course"
       delete "delete_course"
       delete "delete_major"
     end
