@@ -1,0 +1,11 @@
+<ul>
+    <%= link_to('Home', :root) %>  
+  <% if user_signed_in? %>
+    &nbsp  &nbsp  &nbsp  &nbsp
+    <%= link_to('My Profile', user_path(current_user))  %>
+  <% end %>
+    &nbsp  &nbsp  &nbsp  &nbsp
+    <%= link_to('Professors', professors_path)  %>
+    &nbsp  &nbsp  &nbsp  &nbsp
+    <%= link_to('Majors', majors_path)  %>
+</ul>
