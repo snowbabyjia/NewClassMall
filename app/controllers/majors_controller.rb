@@ -59,6 +59,18 @@ class MajorsController < ApplicationController
       else
         redirect_to course_path(@course), notice: 'Course already has this major!'
       end
+    else
+      @major = Major.new(params[:major])
+
+    respond_to do |format|
+        if @major.save
+          format.html { redirect_to @major, notice: 'Major was successfully created.' }
+          format.json { render json: @major, status: :created, location: @major }
+        else
+          format.html { render action: "new" }
+          format.json { render json: @major.errors, status: :unprocessable_entity }
+        end
+      end
     end
   end
 

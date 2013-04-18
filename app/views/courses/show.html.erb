@@ -21,8 +21,13 @@
 </p>
 
 <p>
-  <b>Completes:</b>
+  <b>Completing major:</b>
   <%= render partial: 'major', collection: @course.majors %>
+</p>
+
+<p>
+  <b>Completing distribution:</b>
+  <%= render partial: 'distribution', collection: @course.distributions %>
 </p>
 
 <p>
@@ -34,7 +39,7 @@
 
 
 <%= link_to 'Edit', edit_course_path(@course) %> |
-<%= link_to 'Back', courses_path %>
+<%= link_to 'Back', :root %>
 <%= button_to 'Add to my course', :controller => "users", :action => "add_course", :course_id => @course, :method => "get"%>
 Create a comment now!
 <%= form_for([@course, @course.comments.build]) do |f| %>
@@ -45,7 +50,7 @@ Create a comment now!
 
 Which professor did you have for this class?
 <%= form_for([@course, @course.professors.build]) do |f| %>
-  <%= f.text_field :name%>
+  <%= f.collection_select :id, Professor.all, :id, :name, prompt: true%>
   <%= f.submit %>
 <% end %>
 
@@ -53,6 +58,12 @@ Which professor did you have for this class?
 	Which major does this course count towards?
 	<%= form_for([@course, @course.majors.build]) do |f| %>
 	  <%= f.collection_select :id, Major.all, :id, :name, prompt: true%>
-	  <%= f.submit %>
+	  <%= f.submit%>
+	<% end %>
+	
+	Which districution does this course count towards?
+	<%= form_for([@course, @course.distributions.build]) do |f| %>
+	  <%= f.collection_select :id, Distribution.all, :id, :name, prompt: true%>
+	  <%= f.submit%>
 	<% end %>
 <% end%>

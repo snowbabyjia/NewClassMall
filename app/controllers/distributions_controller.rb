@@ -40,15 +40,26 @@ class DistributionsController < ApplicationController
   # POST /distributions
   # POST /distributions.json
   def create
-    @distribution = Distribution.new(params[:distribution])
-
-    respond_to do |format|
-      if @distribution.save
-        format.html { redirect_to @distribution, notice: 'Distribution was successfully created.' }
-        format.json { render json: @distribution, status: :created, location: @distribution }
+    if params[:course_id].blank?
+      @distribution = Distribution.new(params[:distribution])
+  
+      respond_to do |format|
+        if @distribution.save
+          format.html { redirect_to @distribution, notice: 'Distribution was successfully created.' }
+          format.json { render json: @distribution, status: :created, location: @distribution }
+        else
+          format.html { render action: "new" }
+          format.json { render json: @distribution.errors, status: :unprocessable_entity }
+        end
+      end
+    else
+      @distribution = Distribution.find(params[:distribution][:id])
+      @course = Course.find(params[:course_id])
+      if !@course.distributions.include?(@distribution)
+        @course.distributions << @distribution
+        redirect_to course_path(@course), notice: "Added distribution to this course!"
       else
-        format.html { render action: "new" }
-        format.json { render json: @distribution.errors, status: :unprocessable_entity }
+        redirect_to course_path(@course), notice: "This course already has this distribution!"
       end
     end
   end

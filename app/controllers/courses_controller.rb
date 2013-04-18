@@ -95,4 +95,11 @@ class CoursesController < ApplicationController
     @major.courses.delete @course
     redirect_to course_path(@course)
   end
+
+  def delete_distribution
+    @distribution = Distribution.find(params[:distribution])
+    @course = Course.find(params[:id])
+    @distribution.courses.delete @course
+    redirect_to course_path(@course)
+  end
 end

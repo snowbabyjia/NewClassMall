@@ -40,14 +40,28 @@ class ProfessorsController < ApplicationController
   # POST /professors
   # POST /professors.json
   def create
-    @course = Course.find(params[:course_id])
-    @professor = Professor.find_or_create_by_name(params[:professor])
-    @professor.courses << @course
-    if @professor.save
-      redirect_to course_path(@course)
+    if params[:course_id].present?
+      @course = Course.find(params[:course_id])
+      @professor = Professor.find(params[:professor][:id])
+      @professor.courses << @course
+      if @professor.save
+        redirect_to course_path(@course)
+      else
+        format.html { render action: "new" }
+        format.json { render json: @professor.errors, status: :unprocessable_entity }
+      end
     else
-      format.html { render action: "new" }
-      format.json { render json: @professor.errors, status: :unprocessable_entity }
+      @professor = Professor.new(params[:professor])
+
+      respond_to do |format|
+        if @professor.save
+          format.html { redirect_to @professor, notice: 'Professor was successfully created.' }
+          format.json { render json: @professor, status: :created, location: @professor }
+        else
+          format.html { render action: "new" }
+          format.json { render json: @professor.errors, status: :unprocessable_entity }
+        end
+      end
     end
     
   end

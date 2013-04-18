@@ -20,9 +20,11 @@ ClassMallBdc::Application.routes.draw do
     resources :professors
     resources :users
     resources :majors
+    resources :distributions
     member do
       delete "delete_course"
       delete "delete_major"
+      delete "delete_distribution"
     end
     
   end

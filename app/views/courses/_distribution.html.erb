@@ -1,0 +1,4 @@
+<i><%=link_to distribution.name, distribution %></i>
+<%= button_to 'Not this distribution!', {controller: "courses", action: "delete_distribution", distribution: distribution, method: 'get'},
+    :confirm => 'Are you sure?',
+    :method => :delete if current_user.present? && (current_user.has_role? :admin)%>

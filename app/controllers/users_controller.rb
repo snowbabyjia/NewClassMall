@@ -52,4 +52,5 @@ class UsersController < ApplicationController
     @major.users.delete current_user
     redirect_to user_path(current_user), notice: "Deleted major!"
   end
+  
 end
