@@ -1,0 +1,7 @@
+<div class="notice">
+    <%= link_to major.name, major%>
+    <%= link_to 'Remove major', {:controller => "users", :action => "delete_major", :major_id => major},
+      :confirm => "Are you sure?", 
+      :method => :delete
+      %>
+</div>

@@ -1,0 +1,4 @@
+<i><%=h major.name %></i>
+<%= button_to 'Not this major!', controller: "courses", action: "delete_major", :major => major, :caller => "courses"
+    :confirm => 'Are you sure?',
+    :method => :delete if current_user.has_role? :admin%>

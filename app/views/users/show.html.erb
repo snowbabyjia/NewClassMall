@@ -1,5 +1,11 @@
 <h3>User</h3>
 <p>User: <%= @user.name %></p>
 <p>Email: <%= @user.email if @user.email %></p>
+<p>My Major(s): <%= render partial: 'major', :collection => @user.majors%></p>
 <p> My courses: </p>
 <p><%= render :partial => 'course', :collection => current_user.courses%></p>
+Declare a major!
+<%= form_for([@user, @user.majors.build]) do |f| %>
+  <%= f.text_field :name%>
+  <%= f.submit %>
+<% end %>

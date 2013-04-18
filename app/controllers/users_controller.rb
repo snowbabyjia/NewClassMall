@@ -46,4 +46,10 @@ class UsersController < ApplicationController
     current_user.courses.delete @course
     redirect_to user_path(current_user), :notice => "Deleted course!"
   end
+  
+  def delete_major
+    @major = Major.find(params[:major_id])
+    @major.users.delete current_user
+    redirect_to user_path(current_user), notice: "Deleted major!"
+  end
 end

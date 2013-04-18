@@ -40,16 +40,12 @@ class MajorsController < ApplicationController
   # POST /majors
   # POST /majors.json
   def create
-    @major = Major.new(params[:major])
-
-    respond_to do |format|
-      if @major.save
-        format.html { redirect_to @major, notice: 'Major was successfully created.' }
-        format.json { render json: @major, status: :created, location: @major }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @major.errors, status: :unprocessable_entity }
+    if params[:caller] == "users"
+      @major = Major.find_or_create_by_name(params[:major])
+      unless current_user.has_role? :admin
+        current_user.majors << @major
       end
+      redirect_to user_path(current_user), notice: 'Added major to your profile!'
     end
   end
 

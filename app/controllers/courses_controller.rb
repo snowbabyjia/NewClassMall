@@ -88,4 +88,11 @@ class CoursesController < ApplicationController
     @professor.courses.delete @course
     redirect_to course_path(@course)
   end
+  
+  def delete_major
+    @major = Major.find_or_create_by_name(params[:major_id])
+    @course = Course.find(params[:id])
+    @major.courses.delete @course
+    redirect_to course_path(@course)
+  end
 end
