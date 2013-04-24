@@ -102,4 +102,10 @@ class CoursesController < ApplicationController
     @distribution.courses.delete @course
     redirect_to course_path(@course)
   end
+  
+  def rate
+    @course = Course.find(params[:id])
+    @course.rate(params[:stars], current_user, params[:dimension])
+    render text: (view_context.ratings_for @course), content_type: "text/html"
+  end
 end

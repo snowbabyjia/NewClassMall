@@ -8,4 +8,6 @@ class Course < ActiveRecord::Base
   
   attr_accessible :description, :ending, :starting, :title
   
+  ajaxful_rateable :stars=>10, :allow_update => true
+  
 end

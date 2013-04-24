@@ -1,5 +1,7 @@
 <p id="notice"><%= notice %></p>
-
+<div class="adjustable-rating">
+	<%= ratings_for @course%>
+</div>
 <p>
   <b>Title:</b>
   <%= @course.title %>
@@ -67,3 +69,14 @@ Which professor did you have for this class?
 	  <%= f.submit%>
 	<% end %>
 <% end%>
+
+<% for rater in @course.raters%>
+	<%= rater.name %>
+	<% if rater == current_user %>
+		<div class='me'>
+			<%= ratings_for @course, rater, force_static: true, :show_user_rating => true%>
+		</div>
+	<% else %>
+		<%= ratings_for @course, rater, :show_user_rating => true%>
+	<% end %>
+<% end %>
