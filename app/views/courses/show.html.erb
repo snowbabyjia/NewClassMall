@@ -2,6 +2,7 @@
 <div class="adjustable-rating">
 	<%= ratings_for @course%>
 </div>
+
 <p>
   <b>Title:</b>
   <%= @course.title %>
@@ -37,7 +38,7 @@
   <%= render :partial => 'professor', :collection => @course.professors, :as => :professor%>
 </p>
 
-<%= render :partial => 'comment', :collection => @course.comments %>
+<%= render :partial => 'comment', :collection => @course.comments, :user_id => :user%>
 
 
 <%= link_to 'Edit', edit_course_path(@course) %> |

@@ -38,7 +38,8 @@ gem "figaro", ">= 0.5.0"
 gem "better_errors", ">= 0.2.0", :group => :development
 gem "binding_of_caller", ">= 0.6.8", :group => :development
 gem 'ajaxful_rating', :git => "git://github.com/edgarjs/ajaxful-rating.git", :branch => 'rails3'
-
+gem 'sunspot_rails'
+gem 'sunspot_solr'
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

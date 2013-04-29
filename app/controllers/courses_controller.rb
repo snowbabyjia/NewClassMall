@@ -1,13 +1,21 @@
 class CoursesController < ApplicationController
   # GET /courses
   # GET /courses.json
-  def index
-    @courses = Course.all
+#  def index
+#    @courses = Course.all
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @courses }
+#    respond_to do |format|
+#      format.html # index.html.erb
+#      format.json { render json: @courses }
+#    end
+#  end
+
+  
+  def index
+    @search = Course.search do
+      fulltext params[:search]
     end
+    @courses = @search.results
   end
 
   # GET /courses/1
@@ -108,4 +116,5 @@ class CoursesController < ApplicationController
     @course.rate(params[:stars], current_user, params[:dimension])
     render text: (view_context.ratings_for @course), content_type: "text/html"
   end
+
 end

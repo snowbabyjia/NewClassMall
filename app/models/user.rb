@@ -7,8 +7,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   #Relationships with other models
   has_and_belongs_to_many :courses
-  has_many :comments, inverse_of: :user
-  has_many :ratings, inverse_of: :user
+  has_many :comments, inverse_of: :user, dependent: :destroy
   has_and_belongs_to_many :majors
   
   # Setup accessible (or protected) attributes for your model

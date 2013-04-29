@@ -5,9 +5,7 @@ $(document).ajaxSuccess((event, xhr, settings) ->
      $('.adjustable-rating .ajaxful-rating-wrapper').html(xhr.responseText))
 
 $(()->$('.adjustable-rating a').click((event) -> 
-  alert(event.target)
   stars = parseFloat($(event.target).attr('class')[6..100])
-  alert(stars)
   $('.me .ajaxful-rating li').css('width', (10 * stars) + "%")))
 
 $(document).ajaxError((event, xhr, settings, thrownError) ->
