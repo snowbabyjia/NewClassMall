@@ -1,8 +1,9 @@
 <div class="notice">
   <i>Course: </i>
-    <%= link_to course.title, course %>
-    <%= link_to 'Remove Course', {:controller => "users", :action => "delete_course", :course_id => course},
-      :confirm => "Are you sure?", 
-      :method => :delete
-      %>
+	<%= link_to course.title, course, method: 'get' %>
+	&nbsp &nbsp &nbsp &nbsp
+	<%= link_to 'Remove Course', {:controller => "users", :action => "delete_course", :course_id => course, method: 'get'},
+	  :confirm => "Are you sure?", 
+	  :method => :delete
+	  %>
 </div>

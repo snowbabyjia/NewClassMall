@@ -1,11 +1,23 @@
-<h3>User</h3>
-<p>User: <%= @user.name %></p>
-<p>Email: <%= @user.email if @user.email %></p>
-<p>My Major(s): <%= render partial: 'major', :collection => @user.majors%></p>
-<p> My courses: </p>
-<p><%= render :partial => 'course', :collection => current_user.courses%></p>
-Declare a major!
-<%= form_for([@user, @user.majors.build]) do |f| %>
-  <%= f.collection_select :id, Major.all, :id, :name, :prompt => true%>
-  <%= f.submit %>
-<% end %>
+
+<div class='container-fluid'>
+	<div class='row-fluid'>
+		<div class='span12'>
+			<p>User: <%= @user.name %></p>
+			<p>Email: <%= @user.email if @user.email %></p>
+			<p>My Major(s): <%= render partial: 'major', :collection => @user.majors%></p>
+		</div>
+	</div>
+	<div class='row-fluid'>
+		<div class='span6'>
+			<p> My courses: </p>
+			<p><%= render :partial => 'course', :collection => current_user.courses%></p>
+		</div>
+		<div class='span6'>
+			Declare a major!
+			<%= form_for([@user, @user.majors.build]) do |f| %>
+			  <%= f.collection_select :id, Major.all, :id, :name, :prompt => true%>
+			  <%= f.submit %>
+			<% end %>
+		</div>
+	</div>
+</div>

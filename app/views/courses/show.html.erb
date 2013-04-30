@@ -1,83 +1,103 @@
 <p id="notice"><%= notice %></p>
-<div class="adjustable-rating">
-	<%= ratings_for @course%>
-</div>
-
-<p>
-  <b>Title:</b>
-  <%= @course.title %>
-</p>
-
-<p>
-  <b>Starting:</b>
-  <%= @course.starting %>
-</p>
-
-<p>
-  <b>Ending:</b>
-  <%= @course.ending %>
-</p>
-
-<p>
-  <b>Description:</b>
-  <%= @course.description %>
-</p>
-
-<p>
-  <b>Completing major:</b>
-  <%= render partial: 'major', collection: @course.majors %>
-</p>
-
-<p>
-  <b>Completing distribution:</b>
-  <%= render partial: 'distribution', collection: @course.distributions %>
-</p>
-
-<p>
-  <b>Professor(s):</b>
-  <%= render :partial => 'professor', :collection => @course.professors, :as => :professor%>
-</p>
-
-<%= render :partial => 'comment', :collection => @course.comments, :user_id => :user%>
-
-
-<%= link_to 'Edit', edit_course_path(@course) %> |
-<%= link_to 'Back', :root %>
 <%= button_to 'Add to my course', :controller => "users", :action => "add_course", :course_id => @course, :method => "get"%>
-Create a comment now!
-<%= form_for([@course, @course.comments.build]) do |f| %>
-  <%= f.text_field :content%>
-  <%= f.submit %>
-  
-<% end %>
-
-Which professor did you have for this class?
-<%= form_for([@course, @course.professors.build]) do |f| %>
-  <%= f.collection_select :id, Professor.all, :id, :name, prompt: true%>
-  <%= f.submit %>
-<% end %>
-
-<% if current_user.present? && (current_user.has_role? :admin)%>	
-	Which major does this course count towards?
-	<%= form_for([@course, @course.majors.build]) do |f| %>
-	  <%= f.collection_select :id, Major.all, :id, :name, prompt: true%>
-	  <%= f.submit%>
-	<% end %>
-	
-	Which districution does this course count towards?
-	<%= form_for([@course, @course.distributions.build]) do |f| %>
-	  <%= f.collection_select :id, Distribution.all, :id, :name, prompt: true%>
-	  <%= f.submit%>
-	<% end %>
-<% end%>
-
-<% for rater in @course.raters%>
-	<%= rater.name %>
-	<% if rater == current_user %>
-		<div class='me'>
-			<%= ratings_for @course, rater, force_static: true, :show_user_rating => true%>
+<div class='row-fluid'>
+	<div class='span6'>
+		<h4>Overall rating:</h4>
+		<div class="adjustable-rating">
+			<%= ratings_for @course%>
 		</div>
-	<% else %>
-		<%= ratings_for @course, rater, :show_user_rating => true%>
-	<% end %>
-<% end %>
+	</div>
+	<div class='span6'>
+		<% if current_user.present? && @course.raters.include?(current_user)%>
+			<h4>Your rating for this course:</h4>
+				<div class='me'>
+					<%= ratings_for @course, current_user, force_static: true, :show_user_rating => true%>
+				</div>
+		<% elsif current_user.present? && (current_user.has_role? :admin)%>
+			<% for rater in @course.raters%>
+				<%= rater.name%>
+				<%= ratings_for @course, rater, :show_user_rating => true%>
+			<% end %>
+		<% elsif current_user.present? %>
+			<h4>You haven't rated for this course yet!</h4>
+		<% end %>
+	</div>
+</div>
+<p>
+	<div class='row-fluid'>
+		<div class='span6'>
+			<p>
+			  <b>Title:</b>
+			  <%= @course.title %>
+			</p>
+			
+			<p>
+			  <b>Starting:</b>
+			  <%= @course.starting %>
+			</p>
+			
+			<p>
+			  <b>Ending:</b>
+			  <%= @course.ending %>
+			</p>
+			
+			<p>
+			  <b>Description:</b>
+			  <%= @course.description %>
+			</p>
+			
+			<p>
+			  <b>Completing major:</b>
+			  <%= render partial: 'major', collection: @course.majors %>
+			</p>
+			
+			<p>
+			  <b>Completing distribution:</b>
+			  <%= render partial: 'distribution', collection: @course.distributions %>
+			</p>
+			
+			<p>
+			  <b>Professor(s):</b>
+			  <%= render :partial => 'professor', :collection => @course.professors, :as => :professor%>
+			</p>
+	
+		</div>	
+		<div class='span6'>
+			Which professor did you have for this class?
+			<%= form_for([@course, @course.professors.build]) do |f| %>
+			  <%= f.collection_select :id, Professor.all, :id, :name, prompt: true%>
+			  <%= f.submit %>
+			<% end %>
+			
+			<% if current_user.present? && (current_user.has_role? :admin)%>	
+				Which major does this course count towards?
+				<%= form_for([@course, @course.majors.build]) do |f| %>
+				  <%= f.collection_select :id, Major.all, :id, :name, prompt: true%>
+				  <%= f.submit%>
+				<% end %>
+				
+				Which districution does this course count towards?
+				<%= form_for([@course, @course.distributions.build]) do |f| %>
+				  <%= f.collection_select :id, Distribution.all, :id, :name, prompt: true%>
+				  <%= f.submit%>
+				<% end %>
+			<% end%>
+			
+		</div>
+	</div>
+	<div class='row-fluid'>
+		<div class='span6'>
+			<h5>Look at the review of this course...</h5>
+				<%= render :partial => 'comment', :collection => @course.comments, :as => :comment%>
+		</div>
+		<div class='span6'>
+			<h5>Create a comment now!</h5>
+			<%= form_for([@course, @course.comments.build]) do |f| %>
+			  <%= f.text_field :content%>
+			  <%= f.submit %>
+			  
+			<% end %>
+		</div>
+	</div>
+</p>
+			
