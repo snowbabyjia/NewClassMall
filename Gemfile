@@ -40,6 +40,9 @@ gem "binding_of_caller", ">= 0.6.8", :group => :development
 gem 'ajaxful_rating', :git => "git://github.com/edgarjs/ajaxful-rating.git", :branch => 'rails3'
 gem 'sunspot_rails'
 gem 'sunspot_solr'
+gem "therubyracer"
+gem "less-rails"
+gem "twitter-bootstrap-rails", :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
