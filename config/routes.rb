@@ -1,8 +1,20 @@
 ClassMallBdc::Application.routes.draw do
-  resources :majors
+  resources :majors do
+    resources :courses
+    resources :users
+    member do
+      delete 'delete_course'
+      delete 'delete_user'
+    end
+  end
 
 
-  resources :distributions
+  resources :distributions do
+    resources :courses
+    member do
+      delete 'delete_course'
+    end
+  end
 
 
   resources :ratings
@@ -12,6 +24,10 @@ ClassMallBdc::Application.routes.draw do
 
 
   resources :professors do
+    resources :courses
+    member do
+      delete "delete_course"
+    end
   end
 
 

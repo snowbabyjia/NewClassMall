@@ -91,4 +91,11 @@ class DistributionsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  def delete_course
+    @distribution = Distribution.find(params[:id])
+    @course = Course.find(params[course])
+    @distribution.courses.delete @course
+    redirect_to @distribution, :notice => "Deleted course from this distribution!"
+  end
 end

@@ -1,3 +1,5 @@
+<%- model_class = Course -%>
+
 <h3>Home</h3>
 <%= form_tag courses_path, :method => :get do %>
   <p>
@@ -6,6 +8,23 @@
   </p>
 <% end %>
 
-<% @courses.shuffle.each do |course| %>
-  <p>Course: <%= link_to course.title, course %>  Description: <%= course.description %> </p> 
-<% end %>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:title) %></th>
+      <th><%= model_class.human_attribute_name(:starting) %></th>
+      <th><%= model_class.human_attribute_name(:ending) %></th>
+      <th><%= model_class.human_attribute_name(:description) %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @courses.each do |course| %>
+      <tr>
+        <td><%= link_to course.title, course_path(course) %></td>
+        <td><%= course.starting %></td>
+        <td><%= course.ending %></td>
+        <td><%= course.description %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

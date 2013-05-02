@@ -22,7 +22,7 @@ pre {
 a {
   color: #000;
   &:visited {
-    color: #666;
+    color: #333;
   }
   &:hover {
     color: #fff;
@@ -33,6 +33,19 @@ a {
 div {
   &.field, &.actions {
     margin-bottom: 10px;
+  }
+}
+
+.bs-docs-sidebar a {
+  color: #000;
+}
+
+.nav.bs-docs-sidenav{
+  border: 1px;
+  border-style: solid;
+  border-color: #666;
+  li {
+    border: 1px solid #666
   }
 }
 

@@ -101,4 +101,18 @@ class MajorsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  def delete_course
+    @major = Major.find(params[:id])
+    @course = Course.find(params[course])
+    @major.courses.delete @course
+    redirect_to @major, :notice => "Deleted course from this major!"
+  end
+  
+  def delete_user
+    @major = Major.find(params[:id])
+    @user = User.find(params[:user_id])
+    @major.users.delete @user
+    redirect_to @major, :notice => "Deleted user from this major!"
+  end
 end

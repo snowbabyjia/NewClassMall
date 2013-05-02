@@ -5,32 +5,32 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th><%= model_class.human_attribute_name(:id) %></th>
       <th><%= model_class.human_attribute_name(:name) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
-      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") if current_user.present? && (current_user.has_role? :admin)%></th>
     </tr>
   </thead>
   <tbody>
     <% @professors.each do |professor| %>
       <tr>
-        <td><%= link_to professor.id, professor_path(professor) %></td>
         <td><%= professor.name %></td>
-        <td><%=l professor.created_at %></td>
-        <td>
-          <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_professor_path(professor), :class => 'btn btn-mini' %>
-          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                      professor_path(professor),
-                      :method => :delete,
-                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-                      :class => 'btn btn-mini btn-danger' %>
-        </td>
+        <td><%= link_to "View Courses", professor, {class: 'btn btn-primary'}%></td>
+        <% if current_user.present? && (current_user.has_role? :admin) %>
+	        <td>
+	          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+	                      edit_professor_path(professor), :class => 'btn btn-mini' %>
+	          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+	                      professor_path(professor),
+	                      :method => :delete,
+	                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+	                      :class => 'btn btn-mini btn-danger' %>
+	        </td>
+	    <% end %>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<%= link_to t('.new', :default => t("helpers.links.new")),
-            new_professor_path,
-            :class => 'btn btn-primary' %>
+<% if current_user.present? && (current_user.has_role? :admin)%>
+	<%= link_to t('.new', :default => t("helpers.links.new")),
+	            new_professor_path,
+	            :class => 'btn btn-primary' %>
+<% end %>	            

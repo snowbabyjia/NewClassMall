@@ -93,4 +93,10 @@ class ProfessorsController < ApplicationController
     end
   end
 
+  def delete_course
+    @course = Course.find(params[:course_id])
+    @professor = Professor.find(params[:id])
+    @professor.courses.delete @course
+    redirect_to @professor, :notice => "Deleted course!"
+  end
 end

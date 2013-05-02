@@ -3,8 +3,10 @@
 	<td><%= course.starting %></td>
     <td><%= course.ending %></td>
     <td><%= course.description %></td>
-	<td><%= link_to 'Remove Course', {:controller => "users", :action => "delete_course", :course_id => course}, {
+    <% if current_user.present? && (current_user.has_role? :admin)%>	
+	<td><%= link_to 'Remove Course', {:controller => "majors", :action => "delete_course", :course_id => course}, {
 	  :confirm => "Are you sure?", 
 	  :method => :delete, class: 'btn btn-mini btn-danger'}
 	  %> </td>
+	<% end %>
   </tbody>

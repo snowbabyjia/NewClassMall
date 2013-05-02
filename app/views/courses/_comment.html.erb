@@ -1,7 +1,15 @@
 <div class="comment">
-  <i><%=h comment.user.name %> says:</i><br />
-  <%= simple_format h(comment.content) %>
-  <%= link_to 'Destroy Comment', comment,
-    :confirm => 'Are you sure?',
-    :method => :delete if comment.user == current_user%>
+  <span class="badge badge-success"> <%=comment.user.name%></span> says: <br/>
+  <div class="well">
+  	<%= simple_format h(comment.content) %>
+  </div>
+  <div class='row-fluid'>
+  	<div class='span8'>
+  	</div>
+  	<div class='span4'>
+	  	<%= link_to 'Destroy Comment', comment, {:class => "btn btn-mini",
+	    :confirm => 'Are you sure?',
+	    :method => :delete} if comment.user == current_user%>
+	</div>
+  </div>>
 </div>

@@ -1,13 +1,13 @@
-<ul>
-    <%= link_to('Home', :root) %>  
-  <% if user_signed_in? %>
-    &nbsp  &nbsp  &nbsp  &nbsp
-    <%= link_to('My Profile', user_path(current_user))  %>
-  <% end %>
-    &nbsp  &nbsp  &nbsp  &nbsp
-    <%= link_to('Professors', professors_path)  %>
-    &nbsp  &nbsp  &nbsp  &nbsp
-    <%= link_to('Majors', majors_path)  %>
-    &nbsp  &nbsp  &nbsp  &nbsp
-    <%= link_to('Distributions', distributions_path)  %>
+
+<ul class="nav nav-tdst bs-docs-sidenav">
+	<li><%= link_to('Home', :root) %> </li>
+		<% if user_signed_in? %>
+			<li><%= link_to('My Profile', user_path(current_user))  %></li>
+		<% end %>
+	    <li><%= link_to('Professors', professors_path)  %></li>
+	    <li><%= link_to('Majors', majors_path)%></li>
+	    <li><%= link_to('Distributions', distributions_path)  %></li>
+	  <% if user_signed_in? and current_user.has_role?(:admin)%>
+	  	<li><%= link_to('Courses', courses_path)%></li>
+	  <% end %>
 </ul>
