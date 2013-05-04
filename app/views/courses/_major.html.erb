@@ -1,4 +1,4 @@
-<i><%=link_to major.name, major %></i>
+<i><%=link_to major.name, major, class: 'btn btn-link' %></i>
 <%= button_to 'Not this major!', {controller: "courses", action: "delete_major", :major => major, method: 'get'},
-    :confirm => 'Are you sure?',
-    :method => :delete if current_user.present? && (current_user.has_role? :admin)%>
+    {:confirm => 'Are you sure?',
+    :method => :delete, :class => 'btn'} if current_user.present? && (current_user.has_role? :admin)%>

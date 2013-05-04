@@ -1,9 +1,23 @@
 <%- model_class = Course -%>
 	<div class='row-fluid'>
 		<div class='span12'>
-			<p>User: <%= @user.name %></p>
-			<p>Email: <%= @user.email if @user.email %></p>
-			<p>My Major(s): <%= render partial: 'major', :collection => @user.majors%></p>
+			<p><h4>User: </h4>
+				<div class='well well-small'><%= @user.name %></p></div>
+			<p><h4>Email: </h4>
+				<div class='well well-small'><%= @user.email if @user.email %></p></div>
+			<div class='row-fluid'>
+				<div class='span9'>
+				<p><h4>My Major(s): </h4>
+					<%= render partial: 'major', :collection => @user.majors%></p>
+				</div>
+				<div class='span3'>
+					<h4>Declare a major!</h4>
+					<%= form_for([@user, @user.majors.build]) do |f| %>
+					  <%= f.collection_select :id, Major.all, :id, :name, :prompt => true%>
+					  <%= f.submit "Declare Major", {class: 'btn btn-warning'}%>
+					<% end %>
+				</div>
+			</div>
 		</div>
 	</div>
 	<div class='row-fluid'>
@@ -17,18 +31,11 @@
 				      <th><%= model_class.human_attribute_name(:description) %></th>
 				    </tr>
 				  </thead>
-			    <p> My courses: </p>
-				<p><%= render :partial => 'course', :collection => current_user.courses%></p>
+			    <h4> My courses: </h4> <br/>
+				<%= render :partial => 'course', :collection => current_user.courses%>
 			</table>
 		</div>
-		<div class="span1">
-		</div>
-		<div class='span2'>
-			Declare a major!
-			<%= form_for([@user, @user.majors.build]) do |f| %>
-			  <%= f.collection_select :id, Major.all, :id, :name, :prompt => true%>
-			  <%= f.submit %>
-			<% end %>
+		<div class='span3'>
 		</div>
 	</div>
 

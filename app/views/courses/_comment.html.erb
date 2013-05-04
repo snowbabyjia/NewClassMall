@@ -2,6 +2,10 @@
   <span class="badge badge-success"> <%=comment.user.name%></span> says: <br/>
   <div class="well">
   	<%= simple_format h(comment.content) %>
+  	<div class='pull-right'>
+	  	<small>Created at: 
+	  	<%= comment.created_at %></small>
+	</div>
   </div>
   <div class='row-fluid'>
   	<div class='span8'>
@@ -11,5 +15,5 @@
 	    :confirm => 'Are you sure?',
 	    :method => :delete} if comment.user == current_user%>
 	</div>
-  </div>>
+  </div>
 </div>

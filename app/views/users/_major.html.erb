@@ -1,7 +1,15 @@
 <div class="notice">
-    <%= link_to major.name, major%>
-    <%= link_to 'Remove major', {:controller => "users", :action => "delete_major", :major_id => major},
-      :confirm => "Are you sure?", 
-      :method => :delete
-      %>
+	<div class='row-fluid'>
+		<div class='well'>
+			<div class='span6'>
+		    <%= link_to major.name, major, {class: 'btn btn-link'}%>
+		    </div>
+		    <div class='span6'>
+		    <%= link_to 'Undeclare', {:controller => "users", :action => "delete_major", :major_id => major},
+		      {:confirm => "Are you sure?", 
+		      :method => :delete, class: 'btn'}
+		      %>
+		    </div>
+		</div>
+	</div>
 </div>

@@ -6,6 +6,7 @@
   <thead>
     <tr>
       <th><%= model_class.human_attribute_name(:name) %></th>
+       <th></th>
       <th><%=t '.actions', :default => t("helpers.actions") if current_user.present? && (current_user.has_role? :admin)%></th>
     </tr>
   </thead>
@@ -13,7 +14,7 @@
     <% @majors.each do |major| %>
       <tr>
         <td><%= major.name %></td>
-        <td><%= link_to "View Courses", major, {class: 'btn btn-primary'}%></td>
+        <td><%= link_to "View Courses", major, {class: 'btn btn-info'}%></td>
         <% if current_user.present? && (current_user.has_role? :admin) %>
 	        <td>
 	          <%= link_to t('.edit', :default => t("helpers.links.edit")),
@@ -32,4 +33,4 @@
 
 <%= link_to t('.new', :default => t("helpers.links.new")),
             new_major_path,
-            :class => 'btn btn-primary' if current_user.present? && (current_user.has_role? :admin) %>
+            :class => 'btn btn-success' if current_user.present? && (current_user.has_role? :admin) %>

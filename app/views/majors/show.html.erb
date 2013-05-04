@@ -15,14 +15,16 @@
 		</table>
 	</div>
 	<div class='span4'>
-		<table class="table table-striped">
-			  <thead>
-			    <tr>
-			      <h4><%= "Users in this major" %></h4>
-			    </tr>
-			  </thead>
-			<p><%= render :partial => 'user', :collection => @major.users%></p>
-		</table>
+		<% if current_user.present? && (current_user.has_role? :admin)%>
+			<table class="table table-striped">
+				  <thead>
+				    <tr>
+				      <h4><%= "Users in this major" %></h4>
+				    </tr>
+				  </thead>
+				<p><%= render :partial => 'user', :collection => @major.users%></p>
+			</table>
+		<% end %>
 	</div>
 </div>
 

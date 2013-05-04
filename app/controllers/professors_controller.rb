@@ -43,12 +43,16 @@ class ProfessorsController < ApplicationController
     if params[:course_id].present?
       @course = Course.find(params[:course_id])
       @professor = Professor.find(params[:professor][:id])
-      @professor.courses << @course
-      if @professor.save
-        redirect_to course_path(@course)
+      if !@professor.courses.include?(@course)
+        @professor.courses << @course
+        if @professor.save
+          redirect_to course_path(@course)
+        else
+          format.html { render action: "new" }
+          format.json { render json: @professor.errors, status: :unprocessable_entity }
+        end
       else
-        format.html { render action: "new" }
-        format.json { render json: @professor.errors, status: :unprocessable_entity }
+        redirect_to course_path(@course), notice: "Professor already teaching this course!"
       end
     else
       @professor = Professor.new(params[:professor])
