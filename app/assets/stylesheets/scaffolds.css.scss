@@ -1,6 +1,5 @@
 body {
-  background-color: #fff; 
-  background-image: url(image_path('pink-background.png'));
+  background-image: url(image_path('trees-background.png'));
   color: #333;
   font-family: verdana, arial, helvetica, sans-serif;
   font-size: 13px;
@@ -137,4 +136,26 @@ div {
 
 .content {
   background-color: transparent;
+}
+
+.table.table-striped{
+  tbody {
+        background-color: rgb(186,246,238);
+  }
+}
+
+.well {
+  background-color: rgba(255,255,255,0.5);
+  width: 1000px;
+}
+
+.jumbotron.subhead {
+  position: relative;
+  padding: 40px 0px;
+  background: linear-gradient(45deg, rgb(2, 0, 49) 0%, rgb(109, 51, 83) 100%) repeat scroll 0% 0% transparent;
+}
+.jumbotron h1 {
+  font-weight: bold;
+  line-height: 1;
+  color: #fff;
 }

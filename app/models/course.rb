@@ -12,7 +12,7 @@ class Course < ActiveRecord::Base
   searchable do
     text :title, :description
     text :comments do
-      comments.map {|comment| comment.body}
+      comments.map(&:content)
     end
     
     time :ending

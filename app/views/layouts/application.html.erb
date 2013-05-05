@@ -18,6 +18,11 @@
         </div>
       </nav>
     </header>
+    <header id='overview' class='jumbotron subhead'>
+    	<div class='container'>
+    		<h1>Welcome To ClassMall</h1>
+    	</div>
+    </header>
     <div id="main" role="main">
       <div class="container-fluid">
         <div class="content">
@@ -29,7 +34,9 @@
             </div>
             <div class="span9">
               <%= render 'layouts/messages' %>
-              <%= yield %>
+              <div class='well'>
+              	<%= yield %>
+              </div>
             </div>
           </div>
           <footer>
