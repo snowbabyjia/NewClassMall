@@ -19,4 +19,6 @@ class Course < ActiveRecord::Base
     time :starting
   end
   
+  validates :title, presence: true, uniqueness: true
+  
 end
